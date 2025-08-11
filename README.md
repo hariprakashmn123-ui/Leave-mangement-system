@@ -165,7 +165,7 @@ Response:
 ---
 
 ## 🖼 High-Level Design
-(Include your HLD diagram here, e.g., `hld.png`)
+![High-Level Design](hld.png)
 
 **Basic Flow:**
 [Postman/Frontend]
