@@ -56,28 +56,28 @@ The API will run at:
 <img width="506" height="531" alt="image" src="https://github.com/user-attachments/assets/09f54e17-8745-42c7-b1bf-6ba16698c0f1" />
 
 ### Entities & Relationships
-### Employee
+## Employee
    - Stores details for all employees.
-   ### Fields:
+   #### Fields:
       EmployeeID (PK) — unique identifier
       Name, Email, Department, JoiningDate, LeaveBalance
-   ### Purpose: 
+   #### Purpose: 
       Foundation for all leave tracking; every request and approval links back to an employee.
-### LeaveRequest
+## LeaveRequest
       Logs individual leave applications.
-   ### Fields:
+   #### Fields:
        RequestID (PK) — unique request
        EmployeeID (FK) — references Employee
        LeaveType, StartDate, EndDate, Status
-   ### Purpose: 
+   #### Purpose: 
        Manages leave requests; connects to the requesting employee.
-### LeaveTransaction
+## LeaveTransaction
       Tracks actions and decision history for each leave request.
-   ### Fields:
+   #### Fields:
        TransactionID (PK) — unique transaction
         RequestID (FK) — references LeaveRequest
         Action, ActionDate, ApproverID (FK) — references Employee
-   ### Purpose: 
+   #### Purpose: 
         Monitors approvals and updates for each request, maintaining workflow and audit trail.
 ### How Relationships Work
         Employee → LeaveRequest: Each Employee can submit multiple LeaveRequests.
