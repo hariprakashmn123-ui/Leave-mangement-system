@@ -314,9 +314,9 @@ END
 
 ## 🔮 Possible Future Improvements
 - Scalability:
-- Migrate from SQLite to PostgreSQL/MySQL for better concurrency.
-- Deploy with Docker and Kubernetes for horizontal scaling.
-- Use caching (Redis) to speed up common queries.
+  - Migrate from SQLite to PostgreSQL/MySQL for better concurrency.
+  - Deploy with Docker and Kubernetes for horizontal scaling.
+  - Use caching (Redis) to speed up common queries.
  
 - Features:
 
