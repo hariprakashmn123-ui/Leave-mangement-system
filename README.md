@@ -51,7 +51,7 @@ The API will run at:
 `http://127.0.0.1:5000/`
 
 ## Database Design & ER Diagram
---
+
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/f182b724-25af-4601-a3b6-42ae0425d1a3" />
 
