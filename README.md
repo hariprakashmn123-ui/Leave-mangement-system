@@ -25,8 +25,7 @@ It supports adding employees, applying for leave, approving/rejecting requests, 
 ## ⚙️ Project Setup
 
 ### **1. Clone the Repository**
-git clone https://github.com/Ashritha-Gollapalli/leave-management-system.git
-cd leave_management_system
+git clone https://github.com/hariprakashmn123-ui/Leave-mangement-system
 
 
 ### **2. Create Virtual Environment** *(optional but recommended)*
