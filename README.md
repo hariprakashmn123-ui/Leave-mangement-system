@@ -318,23 +318,23 @@ END
 - Deploy with Docker and Kubernetes for horizontal scaling.
 - Use caching (Redis) to speed up common queries.
  
-## - Features:
+## Features:
 
-  - Build a user-friendly frontend (web or mobile).
+  + Build a user-friendly frontend (web or mobile).
   - Add authentication and role-based access.
   - Support half-day and varied leave types.
   - Auto-exclude weekends and holidays from leave duration.
   - Department-specific leave policies and approvals.
   - Notifications for leave status updates via email/SMS.
 
-## - Optimizations:
+## Optimizations:
 
   - Database indexing for faster queries.
   - Bulk import of employee and leave data.
   - Data backup and export features.
   - Analytics dashboard for HR insights.
 
-## - Deployment & Integration:
+## Deployment & Integration:
 
   - Continuous integration and automated tests.
   - Integration with HRMS or payroll systems.
