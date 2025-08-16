@@ -1,4 +1,4 @@
-#🗂 Leave Management System (Flask + SQLite)
+###🗂 Leave Management System (Flask + SQLite)
 
 A simple **Leave Management System API** built using **Python (Flask)** and **SQLite**.  
 It supports adding employees, applying for leave, approving/rejecting requests, and checking leave balance.
