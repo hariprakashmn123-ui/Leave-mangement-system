@@ -191,7 +191,7 @@ ROUTE: GET / RETURN {"message": "Leave Management System API"}
 
 --------------------------------------------------------------------------------------------------------------------------
 
-ROUTE: POST /employee READ JSON body → name, email, department, joining_date
+### ROUTE: POST /employee READ JSON body → name, email, department, joining_date
 
 
 ```
@@ -205,12 +205,11 @@ TRY:
 EXCEPT IntegrityError:
     RETURN {"error": "Email already exists"} (400)
 ```
-``
 
 -------------------------------------------------------------------------------------------------------------------
 
-ROUTE: POST /leave READ JSON body → employee_id, start_date, end_date, reason
-
+### ROUTE: POST /leave READ JSON body → employee_id, start_date, end_date, reason
+```
 IF any field missing:
     RETURN error (400)
 
@@ -241,9 +240,11 @@ IF overlap exists:
 INSERT leave request (status = "Pending", applied_on = today)
 COMMIT changes
 RETURN success (201)
+```
+---------------------------------------------------------------------------------------------------------------------------
 
-ROUTE: PUT /leave/<leave_id> READ JSON body → status ("Approved" or "Rejected")
-
+### ROUTE: PUT /leave/<leave_id> READ JSON body → status ("Approved" or "Rejected")
+```
 IF status invalid:
     RETURN error (400)
 
@@ -268,20 +269,22 @@ IF status == "Approved":
 UPDATE LeaveRequests status = new_status
 COMMIT changes
 RETURN success (200)
+```
+--------------------------------------------------------------------------------------------------------------------------
 
-ROUTE: GET /employee/<employee_id>/balance CONNECT to database QUERY employee total_leaves, leaves_taken
+### ROUTE: GET /employee/<employee_id>/balance CONNECT to database QUERY employee total_leaves, leaves_taken
 
+```
 IF not found:
     RETURN error (404)
 
 CALCULATE remaining_leaves = total_leaves - leaves_taken
 RETURN {employee_id, total_leaves, leaves_taken, remaining_leaves} (200)
-
+```
 -------------------------------------------------------------------------------------------------------------------------
 START Flask app (debug mode)
 
 END
------
 
 ## 📷 API Testing Screenshots
 
