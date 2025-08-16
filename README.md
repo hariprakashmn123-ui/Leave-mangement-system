@@ -52,6 +52,7 @@ The API will run at:
 
 ## 📊 Leave Management System ER Diagram
    This ER diagram illustrates the core database structure for an efficient Leave Management System.
+
 <img width="506" height="531" alt="image" src="https://github.com/user-attachments/assets/09f54e17-8745-42c7-b1bf-6ba16698c0f1" />
 
 ### Entities & Relationships
@@ -79,13 +80,13 @@ The API will run at:
    ### Purpose: 
         Monitors approvals and updates for each request, maintaining workflow and audit trail.
 ### How Relationships Work
-      -  Employee → LeaveRequest: Each Employee can submit multiple LeaveRequests.
-      -  LeaveRequest → LeaveTransaction: Each LeaveRequest can have multiple actions (approved, rejected, modified).
-      -  Employee → LeaveTransaction (ApproverID): Only an Employee can process or approve a leave (accountability &               security).
+        Employee → LeaveRequest: Each Employee can submit multiple LeaveRequests.
+        LeaveRequest → LeaveTransaction: Each LeaveRequest can have multiple actions (approved, rejected, modified).
+        Employee → LeaveTransaction (ApproverID): Only an Employee can process or approve a leave (accountability &               security).
 ### Design Benefits
-        - Normalized: Avoids redundant data, keeps tables focused.
-        - Scalable: Easily supports growth to many employees and leave policies.
-        - Traceable: Robust audit trail for all actions and approvals.
+         Normalized: Avoids redundant data, keeps tables focused.
+         Scalable: Easily supports growth to many employees and leave policies.
+         Traceable: Robust audit trail for all actions and approvals.
 
 ## Table Definitions
 
