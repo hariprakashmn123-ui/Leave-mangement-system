@@ -1,4 +1,4 @@
-# 🗂 Leave Management System (Flask + SQLite)
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/4077e066-d4f1-40e2-a2f7-2dcd17215abb" /># 🗂 Leave Management System (Flask + SQLite)
 
 A simple **Leave Management System API** built using **Python (Flask)** and **SQLite**.  
 It supports adding employees, applying for leave, approving/rejecting requests, and checking leave balance.
@@ -49,6 +49,42 @@ python app.py
 
 The API will run at:  
 `http://127.0.0.1:5000/`
+
+Database Design & ER Diagram
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/f182b724-25af-4601-a3b6-42ae0425d1a3" />
+
+The ER diagram above shows the main entities and their relationships in the Leave Management System:
+
+Employee: Each record represents an employee. Key attributes include name, email (unique), department, and joining date.
+
+LeaveRequest: Represents a leave application. Attributes include start date, end date, reason, status (Pending/Approved/Rejected), and a link to the corresponding employee via employee_id.
+
+Relationship: Each employee can have multiple leave requests (1-to-many relationship).
+
+Table Definitions
+
+| Column       | Type    | Key/Index    | Description                  |
+|--------------|---------|--------------|------------------------------|
+| id           | INTEGER | PK, auto-inc | Unique employee identifier   |
+| name         | TEXT    |              | Employee name                |
+| email        | TEXT    | Unique       | Employee email (must be unique) |
+| department   | TEXT    |              | Employee's department        |
+| joining_date | TEXT    |              | Date of joining (YYYY-MM-DD) |
+| total_leaves | INTEGER |              | Total allotted leave days    |
+| leaves_taken | INTEGER |              | Number of leaves taken       |
+
+
+LeaveRequests
+
+| Column      | Type    | Key/Index         | Description             |
+|-------------|---------|-------------------|-------------------------|
+| id          | INTEGER | PK, auto-inc      | Unique leave request ID |
+| employee_id | INTEGER | FK                | References Employees(id) |
+| start_date  | TEXT    |                   | Start date of the leave  |
+| end_date    | TEXT    |                   | End date of the leave    |
+| reason      | TEXT    |                   | Reason for leave         |
+| status      | TEXT    |                   | Pending/Approved/Rejected|
+| applied_on  | TEXT    |                   | Date requested          |
 
 ---
 
@@ -127,6 +163,118 @@ Response:
 
 -----
 
+Class/Module Design
+
+| Class/Module     | Main Methods                  | Responsibility          |
+|------------------|------------------------------|-------------------------|
+| EmployeeService  | add_employee, get_balance    | Manages employees       |
+| LeaveService     | apply_leave, approve_leave, reject_leave | Handles leave logic |
+
+
+-----
+
+Low-Level Design — Backend Logic (Pseudocode)
+
+START APP
+
+IMPORT Flask, request, jsonify IMPORT sqlite3 IMPORT init_db FROM database
+
+INITIALIZE Flask app CALL init_db() # create tables if not exist
+
+---------------------------------------------------------------------------------------------------------------------------
+
+ROUTE: GET / RETURN {"message": "Leave Management System API"}
+
+--------------------------------------------------------------------------------------------------------------------------
+
+ROUTE: POST /employee READ JSON body → name, email, department, joining_date
+
+IF name/email/joining_date missing:
+    RETURN error (400)
+
+TRY:
+    CONNECT to database
+    INSERT INTO Employees(name, email, department, joining_date)
+    COMMIT changes
+    RETURN success (201)
+EXCEPT IntegrityError:
+    RETURN {"error": "Email already exists"} (400)
+
+-------------------------------------------------------------------------------------------------------------------
+
+ROUTE: POST /leave READ JSON body → employee_id, start_date, end_date, reason
+
+IF any field missing:
+    RETURN error (400)
+
+CONNECT to database
+QUERY employee details (joining_date, total_leaves, leaves_taken)
+
+IF employee not found:
+    RETURN error (404)
+
+PARSE dates (joining_date, start_date, end_date)
+
+IF start_date > end_date:
+    RETURN error (400)
+
+IF start_date < joining_date:
+    RETURN error (400)
+
+CALCULATE leave_days = (end_date - start_date) + 1
+CALCULATE remaining_leaves = total_leaves - leaves_taken
+
+IF leave_days > remaining_leaves:
+    RETURN error (400)
+
+CHECK overlapping approved leaves for this employee
+IF overlap exists:
+    RETURN error (400)
+
+INSERT leave request (status = "Pending", applied_on = today)
+COMMIT changes
+RETURN success (201)
+
+ROUTE: PUT /leave/<leave_id> READ JSON body → status ("Approved" or "Rejected")
+
+IF status invalid:
+    RETURN error (400)
+
+CONNECT to database
+QUERY leave request by leave_id
+
+IF not found:
+    RETURN error (404)
+
+IF leave not in "Pending" state:
+    RETURN error (400)
+
+IF status == "Approved":
+    CALCULATE leave_days = (end_date - start_date) + 1
+    GET employee leave balance
+
+    IF leave_days > remaining_leaves:
+        RETURN error (400)
+
+    UPDATE employee leaves_taken += leave_days
+
+UPDATE LeaveRequests status = new_status
+COMMIT changes
+RETURN success (200)
+
+ROUTE: GET /employee/<employee_id>/balance CONNECT to database QUERY employee total_leaves, leaves_taken
+
+IF not found:
+    RETURN error (404)
+
+CALCULATE remaining_leaves = total_leaves - leaves_taken
+RETURN {employee_id, total_leaves, leaves_taken, remaining_leaves} (200)
+
+-------------------------------------------------------------------------------------------------------------------------
+START Flask app (debug mode)
+
+END
+-----
 
 ## 📷 API Testing Screenshots
 
@@ -155,11 +303,31 @@ Response:
 ---
 
 ## 🔮 Possible Future Improvements
-- Support half-day leaves.
-- Department-based leave policies.
-- Exclude weekends/holidays in leave calculation.
-- Add authentication system.
-- Deploy to cloud platform.
+- Scalability:
+- Migrate from SQLite to PostgreSQL/MySQL for better concurrency.
+- Deploy with Docker and Kubernetes for horizontal scaling.
+- Use caching (Redis) to speed up common queries.
+ 
+- Features:
+
+- Build a user-friendly frontend (web or mobile).
+- Add authentication and role-based access.
+- Support half-day and varied leave types.
+- Auto-exclude weekends and holidays from leave duration.
+- Department-specific leave policies and approvals.
+- Notifications for leave status updates via email/SMS.
+
+- Optimizations:
+
+- Database indexing for faster queries.
+- Bulk import of employee and leave data.
+- Data backup and export features.
+- Analytics dashboard for HR insights.
+
+- Deployment & Integration:
+
+- Continuous integration and automated tests.
+- Integration with HRMS or payroll systems.
 
 ---
 
