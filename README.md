@@ -334,10 +334,10 @@ END
    - Data backup and export features.
    - Analytics dashboard for HR insights.
 
-## Deployment & Integration:
+- Deployment & Integration:
 
-  - Continuous integration and automated tests.
-  - Integration with HRMS or payroll systems.
+   - Continuous integration and automated tests.
+   - Integration with HRMS or payroll systems.
 
 ---
 
