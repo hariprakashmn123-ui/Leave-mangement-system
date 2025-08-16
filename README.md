@@ -50,7 +50,9 @@ python app.py
 The API will run at:  
 `http://127.0.0.1:5000/`
 
-Database Design & ER Diagram
+## Database Design & ER Diagram
+--
+
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/f182b724-25af-4601-a3b6-42ae0425d1a3" />
 
 The ER diagram above shows the main entities and their relationships in the Leave Management System:
@@ -63,7 +65,7 @@ Relationship: Each employee can have multiple leave requests (1-to-many relation
 
 ### Table Definitions
 
- Employees
+ __ Employees
 
 | Column       | Type    | Key/Index    | Description                  |
 |--------------|---------|--------------|------------------------------|
@@ -76,7 +78,7 @@ Relationship: Each employee can have multiple leave requests (1-to-many relation
 | leaves_taken | INTEGER |              | Number of leaves taken       |
 
 
-LeaveRequests
+__ LeaveRequests
 
 | Column      | Type    | Key/Index         | Description             |
 |-------------|---------|-------------------|-------------------------|
@@ -165,7 +167,7 @@ Response:
 
 -----
 
-Class/Module Design
+## Class/Module Design
 
 | Class/Module     | Main Methods                  | Responsibility          |
 |------------------|------------------------------|-------------------------|
@@ -175,9 +177,9 @@ Class/Module Design
 
 -----
 
-Low-Level Design — Backend Logic (Pseudocode)
+## Low-Level Design — Backend Logic (Pseudocode)
 
-START APP
+__ START APP
 
 IMPORT Flask, request, jsonify IMPORT sqlite3 IMPORT init_db FROM database
 
@@ -190,6 +192,7 @@ ROUTE: GET / RETURN {"message": "Leave Management System API"}
 --------------------------------------------------------------------------------------------------------------------------
 
 ROUTE: POST /employee READ JSON body → name, email, department, joining_date
+
 
 IF name/email/joining_date missing:
     RETURN error (400)
