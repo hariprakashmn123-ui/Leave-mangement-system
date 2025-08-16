@@ -179,7 +179,7 @@ Response:
 
 ## Low-Level Design — Backend Logic (Pseudocode)
 
-__ START APP
+START APP
 
 IMPORT Flask, request, jsonify IMPORT sqlite3 IMPORT init_db FROM database
 
@@ -194,9 +194,9 @@ ROUTE: GET / RETURN {"message": "Leave Management System API"}
 ROUTE: POST /employee READ JSON body → name, email, department, joining_date
 
 
+```
 IF name/email/joining_date missing:
     RETURN error (400)
-
 TRY:
     CONNECT to database
     INSERT INTO Employees(name, email, department, joining_date)
@@ -204,6 +204,8 @@ TRY:
     RETURN success (201)
 EXCEPT IntegrityError:
     RETURN {"error": "Email already exists"} (400)
+```
+``
 
 -------------------------------------------------------------------------------------------------------------------
 
