@@ -65,7 +65,7 @@ Relationship: Each employee can have multiple leave requests (1-to-many relation
 
 ### Table Definitions
 
- __ Employees
+ ### Employees
 
 | Column       | Type    | Key/Index    | Description                  |
 |--------------|---------|--------------|------------------------------|
@@ -78,7 +78,7 @@ Relationship: Each employee can have multiple leave requests (1-to-many relation
 | leaves_taken | INTEGER |              | Number of leaves taken       |
 
 
-__ LeaveRequests
+### LeaveRequests
 
 | Column      | Type    | Key/Index         | Description             |
 |-------------|---------|-------------------|-------------------------|
