@@ -63,7 +63,7 @@ The API will run at:
    ### Purpose: 
       Foundation for all leave tracking; every request and approval links back to an employee.
 ### LeaveRequest
-     - Logs individual leave applications.
+      Logs individual leave applications.
    ### Fields:
        RequestID (PK) — unique request
        EmployeeID (FK) — references Employee
@@ -71,17 +71,17 @@ The API will run at:
    ### Purpose: 
        Manages leave requests; connects to the requesting employee.
 ### LeaveTransaction
-     - Tracks actions and decision history for each leave request.
+      Tracks actions and decision history for each leave request.
    ### Fields:
-      - TransactionID (PK) — unique transaction
+       TransactionID (PK) — unique transaction
         RequestID (FK) — references LeaveRequest
         Action, ActionDate, ApproverID (FK) — references Employee
    ### Purpose: 
         Monitors approvals and updates for each request, maintaining workflow and audit trail.
 ### How Relationships Work
-      - ** Employee → LeaveRequest: ** Each Employee can submit multiple LeaveRequests.
-      - ** LeaveRequest → LeaveTransaction:** Each LeaveRequest can have multiple actions (approved, rejected, modified).
-      - ** Employee → LeaveTransaction (ApproverID):** Only an Employee can process or approve a leave (accountability &               security).
+      -  Employee → LeaveRequest: Each Employee can submit multiple LeaveRequests.
+      -  LeaveRequest → LeaveTransaction: Each LeaveRequest can have multiple actions (approved, rejected, modified).
+      -  Employee → LeaveTransaction (ApproverID): Only an Employee can process or approve a leave (accountability &               security).
 ### Design Benefits
         - Normalized: Avoids redundant data, keeps tables focused.
         - Scalable: Easily supports growth to many employees and leave policies.
