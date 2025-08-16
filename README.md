@@ -63,7 +63,7 @@ LeaveRequest: Represents a leave application. Attributes include start date, end
 
 Relationship: Each employee can have multiple leave requests (1-to-many relationship).
 
-### Table Definitions
+## Table Definitions
 
  ### Employees
 
