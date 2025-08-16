@@ -82,13 +82,13 @@ The API will run at:
    #### Purpose: 
         Monitors approvals and updates for each request, maintaining workflow and audit trail.
 ### How Relationships Work
-        **Employee → LeaveRequest:** Each Employee can submit multiple LeaveRequests.
-        **LeaveRequest → LeaveTransaction:** Each LeaveRequest can have multiple actions (approved, rejected, modified).
-        **Employee → LeaveTransaction (ApproverID):** Only an Employee can process or approve a leave (accountability &               security).
+        **Employee** → **LeaveRequest**: Each Employee can submit multiple LeaveRequests.
+        **LeaveRequest** → **LeaveTransaction**: Each LeaveRequest can have multiple actions (approved, rejected, modified).
+        **Employee** → **LeaveTransaction** (ApproverID): Only an Employee can process or approve a leave (accountability & security).
 ### Design Benefits
-         **Normalized:** Avoids redundant data, keeps tables focused.
-         **Scalable:** Easily supports growth to many employees and leave policies.
-         **Traceable:** Robust audit trail for all actions and approvals.
+         **Normalized**: Avoids redundant data, keeps tables focused.
+         **Scalable**: Easily supports growth to many employees and leave policies.
+         **Traceable**: Robust audit trail for all actions and approvals.
 
 ## Table Definitions
 
